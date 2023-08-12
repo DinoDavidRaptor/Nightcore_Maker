@@ -5,9 +5,10 @@ from os import path
 from pydub import AudioSegment
 import numpy as np
 from moviepy.editor import AudioFileClip, ImageClip
+import sys
 
 # Insert directory path
-mp3_dir = r'mp3'
+mp3_dir = r'mp3ss'
 wav_dir = r'wav'
 mp3_list = []
 wav_list = []
@@ -17,6 +18,39 @@ nightcore_magic_number = 0.35
 imgs_dir = r'imgs'
 used_imgs_dir = r'used imgs'
 mp4_dir = r'mp4'
+
+#Enviorment check for new users
+def env_check():
+    mp4f, mp3f, wavf, nightcoref = 0, 0, 0, 0
+    for file in os.listdir():
+        if file == 'mp3ss':
+            mp3f = 1
+        elif file == 'mp4':
+            mp4f = 1
+        elif file == 'wav':
+            wavf = 1
+        elif file == 'nightcore temple':
+            nightcoref = 1
+    
+    if mp3f == 0:
+        os.mkdir('mp3ss')
+        mp3f = 1
+    if mp4f == 0:
+        os.mkdir('mp4')
+        mp4f = 1
+    if wavf == 0:
+        os.mkdir('wav')
+        wavf = 1
+    if nightcoref == 0:
+        os.mkdir('nightcore temple')
+        nightcoref = 1
+    
+    total = mp3f + mp4f + wavf + nightcoref
+
+    if total == 4:
+        print('Enviorment is ready :)')
+
+env_check()  #Optional
 
 #Creates a dictionary of the songnames and artists ('songname' : 'artist')
 try:
